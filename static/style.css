@@ -1,0 +1,676 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-size: 55px;
+}
+
+header h1 {
+    font-size: 38px;
+}
+
+header p {
+    color: #666;
+    margin-top: 5px;
+}
+
+
+/* Main */
+
+main {
+    text-align: center;
+}
+
+main h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.intro {
+    color: #666;
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+
+/* Cards */
+
+/* Cards */
+
+.buddy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buddy-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s;
+    text-align: center;
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buddy-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.buddy-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.buddy-card p {
+    color: #666;
+    line-height: 1.6;
+    min-height: 70px;
+}
+
+.buddy-card button {
+    margin-top: 20px;
+}
+
+/* Buttons */
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #333;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #777;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .buddy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+}
+.selection-box {
+    background: white;
+    max-width: 500px;
+    margin: 35px auto;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.selection-box label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.selection-box select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.learning-header {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.learning-header h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.learning-header p {
+    font-size: 18px;
+    color: #666;
+}
+
+.learning-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.learning-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s;
+}
+
+.learning-card:hover {
+    transform: translateY(-5px);
+}
+
+.learning-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.learning-card h3 {
+    margin-bottom: 10px;
+}
+
+.learning-card p {
+    color: #666;
+}
+.explanation-box {
+    background: white;
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.explanation-box h2 {
+    margin-bottom: 25px;
+}
+
+.explanation-text {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #333;
+}
+.question-box {
+    background: white;
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.question-box h2 {
+    margin-bottom: 25px;
+}
+
+.question-box textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    resize: vertical;
+    margin-bottom: 20px;
+}
+
+.question-display {
+    background: white;
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: left;
+}
+
+.question-display p {
+    margin-top: 12px;
+    font-size: 17px;
+}
+
+.answer-box {
+    background: white;
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.answer-text {
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 1.8;
+}
+/* Responsive Cards */
+
+@media (max-width: 900px) {
+    .buddy-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+}
+/* Learning Insights */
+
+.insight-card {
+    background: white;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.insight-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.insight-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.big-number {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.activity-box {
+    background: white;
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.activity-box h2 {
+    margin-bottom: 20px;
+}
+
+.activity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.no-activity {
+    color: #777;
+    text-align: center;
+    padding: 20px;
+}
+/* =========================
+   Learning Insights
+   ========================= */
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 35px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.insight-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.insight-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.insight-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.insight-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.insight-card p {
+    color: #666;
+}
+
+
+/* =========================
+   Class Comparison
+   ========================= */
+
+.insights-section {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    max-width: 1100px;
+
+    margin: 35px auto 0;
+}
+
+.insights-section h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.insights-section > p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+
+/* Student Rows */
+
+.student-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.student-row {
+    display: grid;
+
+    grid-template-columns:
+        120px
+        1fr
+        80px;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.student-name {
+    font-size: 16px;
+}
+
+.student-bar-container {
+    height: 18px;
+
+    background: #eeeeee;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.student-bar {
+    height: 100%;
+
+    background: #4f8cff;
+
+    border-radius: 10px;
+
+    min-width: 4px;
+}
+
+.student-time {
+    text-align: right;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   Activity
+   ========================= */
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.activity-row {
+    display: grid;
+
+    grid-template-columns:
+        50px
+        1fr
+        120px;
+
+    align-items: center;
+
+    padding: 15px;
+
+    background: #f7f9fc;
+
+    border-radius: 12px;
+}
+
+.activity-icon {
+    font-size: 25px;
+}
+
+.activity-name {
+    font-weight: 500;
+}
+
+.activity-time {
+    text-align: right;
+
+    font-weight: bold;
+}
+
+.empty-message {
+    padding: 25px;
+
+    text-align: center;
+
+    background: #f7f9fc;
+
+    border-radius: 12px;
+
+    color: #666;
+}
+
+
+/* =========================
+   Back Button
+   ========================= */
+
+.back-button {
+    text-align: center;
+
+    margin-top: 30px;
+}
+
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .student-row {
+        grid-template-columns:
+            100px
+            1fr
+            70px;
+
+        gap: 10px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .student-row {
+        grid-template-columns: 1fr;
+    }
+
+    .student-time {
+        text-align: left;
+    }
+
+    .activity-row {
+        grid-template-columns:
+            40px
+            1fr
+            80px;
+    }
+
+}
+/* =========================
+   Chapter Summary
+   ========================= */
+
+.summary-content {
+    margin-top: 25px;
+    padding: 30px;
+    background: #f8fafc;
+    border-radius: 16px;
+    line-height: 1.7;
+    text-align: left;
+    font-size: 16px;
+}
+
+
+/* Main headings */
+
+.summary-content h1,
+.summary-content h2,
+.summary-content h3 {
+    margin-top: 25px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+
+/* First heading */
+
+.summary-content h1:first-child,
+.summary-content h2:first-child,
+.summary-content h3:first-child {
+    margin-top: 0;
+}
+
+
+/* Paragraphs */
+
+.summary-content p {
+    margin-bottom: 15px;
+}
+
+
+/* Bold text */
+
+.summary-content strong {
+    font-weight: 700;
+}
+
+
+/* Lists */
+
+.summary-content ul,
+.summary-content ol {
+    margin: 10px 0 20px 25px;
+}
+
+
+.summary-content li {
+    margin-bottom: 8px;
+}
+
+
+/* Horizontal lines */
+
+.summary-content hr {
+    border: 0;
+    border-top: 1px solid #dddddd;
+    margin: 25px 0;
+}
+
+
+/* Code / special text */
+
+.summary-content code {
+    background: #eeeeee;
+    padding: 2px 6px;
+    border-radius: 5px;
+}
+
+
+/* Links if Gemini ever produces them */
+
+.summary-content a {
+    text-decoration: none;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explain Topic - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <div class="logo">🤖</div>
+
+        <div>
+            <h1>Student Buddy</h1>
+            <p>AI-powered learning assistant</p>
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="learning-header">
+
+            <h2>📖 {{ chapter }}</h2>
+
+            <p>{{ subject }} • Class 8</p>
+
+        </div>
+
+
+        <div class="explanation-box">
+
+            <h2>💡 Let's Understand This</h2>
+
+            <div class="explanation-text">
+                {{ explanation | replace('\n', '<br>') | safe }}
+            </div>
+
+        </div>
+
+
+        <br>
+
+        <a href="/study">
+            ← Choose another chapter
+        </a>
+
+    </main>
+
+</div>
+<script>
+
+    const startTime = Date.now();
+
+    function saveLearningTime() {
+
+        const endTime = Date.now();
+
+        const duration =
+            Math.floor((endTime - startTime) / 1000);
+
+        if (duration < 1) {
+            return;
+        }
+
+        fetch("/track-time", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                section: "Explain Topic",
+
+                duration: duration
+
+            })
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "beforeunload",
+        saveLearningTime
+    );
+
+</script>
+
+</body>
+
+</html>

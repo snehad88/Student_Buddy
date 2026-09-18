@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Insights - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">🎓</div>
+
+        <div>
+
+            <h1>Student Buddy</h1>
+
+            <p>Your Smart School Companion</p>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main>
+
+        <h2>⏱️ Learning Insights</h2>
+
+        <p class="intro">
+            Understand your learning habits and compare your
+            learning time with your classmates.
+        </p>
+
+
+        <!-- Summary Cards -->
+
+        <div class="insights-grid">
+
+
+            <!-- Your Time -->
+
+            <div class="insight-card">
+
+                <div class="insight-icon">
+                    ⏱️
+                </div>
+
+                <h3>Your Learning Time</h3>
+
+                <div class="insight-number">
+                    {{ your_minutes }} min
+                </div>
+
+                <p>
+                    Total time spent learning
+                </p>
+
+            </div>
+
+
+            <!-- Class Average -->
+
+            <div class="insight-card">
+
+                <div class="insight-icon">
+                    📊
+                </div>
+
+                <h3>Class Average</h3>
+
+                <div class="insight-number">
+                    {{ class_average }} min
+                </div>
+
+                <p>
+                    Average learning time
+                </p>
+
+            </div>
+
+
+            <!-- Difference -->
+
+            <div class="insight-card">
+
+                <div class="insight-icon">
+                    📈
+                </div>
+
+                <h3>Your Activity</h3>
+
+                {% if difference >= 0 %}
+
+                    <div class="insight-number">
+                        {{ difference }} min
+                    </div>
+
+                    <p>
+                        Above class average
+                    </p>
+
+                {% else %}
+
+                    <div class="insight-number">
+                        {{ difference|abs }} min
+                    </div>
+
+                    <p>
+                        Below class average
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Class Comparison -->
+
+        <div class="insights-section">
+
+            <h3>👩‍🎓 Class Learning Time</h3>
+
+            <p>
+                Learning time of students in the Class 8 group
+            </p>
+
+
+            <div class="student-list">
+
+
+                {% for student, minutes in students.items() %}
+
+                <div class="student-row">
+
+
+                    <div class="student-name">
+
+                        {% if student == "You" %}
+
+                            ⭐ <strong>You</strong>
+
+                        {% else %}
+
+                            {{ student }}
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="student-bar-container">
+
+                        <div class="student-bar"
+                             style="width: {{ (minutes / highest_time * 100)|round }}%;">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-time">
+
+                        {{ minutes }} min
+
+                    </div>
+
+
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+
+        <!-- Your Activity -->
+
+        <div class="insights-section">
+
+            <h3>📚 Where You Spent Your Time</h3>
+
+            <p>
+                Your learning activity inside Student Buddy
+            </p>
+
+
+            {% if activities %}
+
+                <div class="activity-list">
+
+
+                    {% for activity in activities %}
+
+                    <div class="activity-row">
+
+                        <div class="activity-icon">
+
+                            {{ activity.icon }}
+
+                        </div>
+
+
+                        <div class="activity-name">
+
+                            {{ activity.section }}
+
+                        </div>
+
+
+                        <div class="activity-time">
+
+                            {{ activity.duration }}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-message">
+
+                    Start learning to see your activity here! 📖
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- Back Button -->
+
+        <div class="back-button">
+
+            <a href="/">
+
+                <button>
+                    ← Back to Home
+                </button>
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            Student Buddy • Making school life smarter and easier
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

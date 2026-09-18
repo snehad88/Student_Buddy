@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <div class="logo">🎓</div>
+
+            <div>
+                <h1>Student Buddy</h1>
+                <p>Your Smart School Companion</p>
+            </div>
+        </header>
+
+
+        <main>
+
+            <h2>Welcome to Student Buddy! 👋</h2>
+
+            <p class="intro">
+                Learn, explore, and understand your learning journey —
+                all in one place.
+            </p>
+
+
+            <div class="buddy-grid">
+
+
+                <!-- Study Buddy -->
+
+                <div class="buddy-card">
+
+                    <div class="icon">📚</div>
+
+                    <h3>Study Buddy</h3>
+
+                    <p>
+                        Learn topics, ask questions,
+                        read summaries and take quizzes.
+                    </p>
+
+                    <a href="/study">
+                        <button>Start Learning</button>
+                    </a>
+
+                </div>
+
+
+                <!-- Learning Insights -->
+
+                <div class="buddy-card">
+
+                    <div class="icon">⏱️</div>
+
+                    <h3>Learning Insights</h3>
+
+                    <p>
+                        See how much time you spend learning
+                        and explore your activity across Student Buddy.
+                    </p>
+
+                    <a href="/insights">
+                        <button>View My Insights</button>
+                    </a>
+
+                </div>
+
+
+                <!-- New Joiner Kit -->
+
+                <div class="buddy-card">
+
+                    <div class="icon">🎒</div>
+
+                    <h3>New Joiner Kit</h3>
+
+                    <p>
+                        Discover school rules, guidelines,
+                        facilities and important information.
+                    </p>
+
+                    <button>Explore</button>
+
+                </div>
+
+
+            </div>
+
+        </main>
+
+
+        <footer>
+
+            <p>
+                Student Buddy • Making school life smarter and easier
+            </p>
+
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

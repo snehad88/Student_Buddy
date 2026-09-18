@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Answer - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <div class="logo">🤖</div>
+
+        <div>
+            <h1>Student Buddy</h1>
+            <p>Your AI learning assistant</p>
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="learning-header">
+
+            <h2>{{ chapter }}</h2>
+
+            <p>{{ subject }} • Class 8</p>
+
+        </div>
+
+
+        <div class="question-display">
+
+            <h3>💬 Your Question</h3>
+
+            <p>{{ question }}</p>
+
+        </div>
+
+
+        <div class="answer-box">
+
+            <h2>🤖 Student Buddy's Answer</h2>
+
+            <div class="answer-text">
+                {{ answer | replace('\n', '<br>') | safe }}
+            </div>
+
+        </div>
+
+
+        <br>
+
+        <a href="/ask?subject={{ subject }}&chapter={{ chapter }}">
+            💡 Ask another question
+        </a>
+
+        <br><br>
+
+        <a href="/learn?subject={{ subject }}&chapter={{ chapter }}">
+            ← Back to Learning
+        </a>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

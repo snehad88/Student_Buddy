@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Chapter Summary - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">🎓</div>
+
+        <div>
+
+            <h1>Student Buddy</h1>
+
+            <p>Your Smart School Companion</p>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main>
+
+        <h2>📝 Chapter Summary</h2>
+
+        <p class="intro">
+
+            A simple summary to help you understand
+            and revise the chapter.
+
+        </p>
+
+
+        <!-- Chapter Information -->
+
+        <div class="insights-section">
+
+            <h3>
+                {{ subject }} — {{ chapter }}
+            </h3>
+
+
+            <div class="summary-content">
+
+                {{ summary | safe }}
+
+            </div>
+
+        </div>
+
+
+        <!-- Back Button -->
+
+        <div class="back-button">
+
+            <a href="/learn?subject={{ subject }}&chapter={{ chapter }}">
+
+                <button>
+                    ← Back to Learning
+                </button>
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            Student Buddy • Making school life smarter and easier
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+<!-- Time Tracking -->
+
+<script>
+
+    const startTime = Date.now();
+
+
+    function saveLearningTime() {
+
+        const endTime = Date.now();
+
+        const duration =
+            Math.floor((endTime - startTime) / 1000);
+
+
+        if (duration < 1) {
+
+            return;
+
+        }
+
+
+        fetch("/track-time", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                section: "Summary",
+
+                duration: duration
+
+            })
+
+        });
+
+    }
+
+
+    window.addEventListener(
+        "beforeunload",
+        saveLearningTime
+    );
+
+</script>
+
+
+</body>
+
+</html>

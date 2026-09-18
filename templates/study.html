@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Buddy - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="logo">📚</div>
+
+        <div>
+            <h1>Study Buddy</h1>
+            <p>Your interactive learning companion</p>
+        </div>
+    </header>
+
+
+    <main>
+
+        <h2>Choose What You Want to Learn</h2>
+
+        <p class="intro">
+            Select your class, subject and chapter to begin learning.
+        </p>
+
+
+        <div class="selection-box">
+
+            <!-- Class -->
+
+            <label for="class">Class</label>
+
+            <select id="class" onchange="loadSubjects()">
+
+                <option value="">
+                    Select Class
+                </option>
+
+                {% for class_name in classes %}
+
+                <option value="{{ class_name }}">
+                    Class {{ class_name }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <!-- Subject -->
+
+            <label for="subject">Subject</label>
+
+            <select id="subject"
+                    onchange="loadChapters()"
+                    disabled>
+
+                <option value="">
+                    Select a class first
+                </option>
+
+            </select>
+
+
+            <!-- Chapter -->
+
+            <label for="chapter">Chapter</label>
+
+            <select id="chapter"
+                    disabled>
+
+                <option value="">
+                    Select a subject first
+                </option>
+
+            </select>
+
+
+            <br>
+
+            <button onclick="startLearning()">
+                Start Learning
+            </button>
+
+        </div>
+
+
+        <br>
+
+        <a href="/">
+            ← Back to Home
+        </a>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/*
+    Curriculum comes from curriculum.py
+    through Flask.
+*/
+
+const curriculum =
+    {{ curriculum | tojson }};
+
+
+/* --------------------------------
+   LOAD SUBJECTS
+-------------------------------- */
+
+function loadSubjects() {
+
+    const classDropdown =
+        document.getElementById("class");
+
+    const subjectDropdown =
+        document.getElementById("subject");
+
+    const chapterDropdown =
+        document.getElementById("chapter");
+
+
+    const selectedClass =
+        classDropdown.value;
+
+
+    // Reset subject dropdown
+
+    subjectDropdown.innerHTML = "";
+
+    subjectDropdown.disabled = true;
+
+
+    // Reset chapter dropdown
+
+    chapterDropdown.innerHTML = "";
+
+    chapterDropdown.disabled = true;
+
+
+    if (!selectedClass) {
+
+        subjectDropdown.innerHTML = `
+            <option value="">
+                Select a class first
+            </option>
+        `;
+
+        chapterDropdown.innerHTML = `
+            <option value="">
+                Select a subject first
+            </option>
+        `;
+
+        return;
+    }
+
+
+    // Default subject option
+
+    subjectDropdown.innerHTML = `
+        <option value="">
+            Select Subject
+        </option>
+    `;
+
+
+    // Get subjects for selected class
+
+    const subjects =
+        curriculum[selectedClass];
+
+
+    Object.keys(subjects).forEach(function(subject) {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value = subject;
+
+        option.textContent = subject;
+
+
+        subjectDropdown.appendChild(option);
+
+    });
+
+
+    subjectDropdown.disabled = false;
+
+}
+
+
+/* --------------------------------
+   LOAD CHAPTERS
+-------------------------------- */
+
+function loadChapters() {
+
+    const selectedClass =
+        document.getElementById("class").value;
+
+    const selectedSubject =
+        document.getElementById("subject").value;
+
+    const chapterDropdown =
+        document.getElementById("chapter");
+
+
+    chapterDropdown.innerHTML = "";
+
+    chapterDropdown.disabled = true;
+
+
+    if (!selectedClass || !selectedSubject) {
+
+        chapterDropdown.innerHTML = `
+            <option value="">
+                Select a subject first
+            </option>
+        `;
+
+        return;
+    }
+
+
+    // Default option
+
+    chapterDropdown.innerHTML = `
+        <option value="">
+            Select Chapter
+        </option>
+    `;
+
+
+    const subjectData =
+        curriculum[selectedClass][selectedSubject];
+
+
+    const chapters =
+        subjectData.chapters;
+
+
+    chapters.forEach(function(chapter) {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value = chapter;
+
+        option.textContent = chapter;
+
+
+        chapterDropdown.appendChild(option);
+
+    });
+
+
+    chapterDropdown.disabled = false;
+
+}
+
+
+/* --------------------------------
+   START LEARNING
+-------------------------------- */
+
+function startLearning() {
+
+    const selectedClass =
+        document.getElementById("class").value;
+
+    const selectedSubject =
+        document.getElementById("subject").value;
+
+    const selectedChapter =
+        document.getElementById("chapter").value;
+
+
+    if (
+        !selectedClass ||
+        !selectedSubject ||
+        !selectedChapter
+    ) {
+
+        alert(
+            "Please select class, subject and chapter."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "/learn?class=" +
+        encodeURIComponent(selectedClass) +
+        "&subject=" +
+        encodeURIComponent(selectedSubject) +
+        "&chapter=" +
+        encodeURIComponent(selectedChapter);
+
+}
+
+</script>
+
+</body>
+
+</html>

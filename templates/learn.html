@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Learning - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <div class="logo">📚</div>
+
+        <div>
+
+            <h1>Study Buddy</h1>
+
+            <p>Your interactive learning companion</p>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="learning-header">
+
+            <h2 id="chapterTitle">
+                Chapter
+            </h2>
+
+            <p id="classTitle">
+                Class
+            </p>
+
+            <p id="subjectTitle">
+                Subject
+            </p>
+
+        </div>
+
+
+        <h2>What would you like to do?</h2>
+
+
+        <div class="learning-options">
+
+
+            <!-- Explain Topic -->
+
+            <div class="learning-card"
+                 onclick="explainTopic()">
+
+                <div class="learning-icon">
+                    📖
+                </div>
+
+                <h3>Explain Topic</h3>
+
+                <p>
+                    Understand the topic in simple language.
+                </p>
+
+            </div>
+
+
+            <!-- Ask Question -->
+
+            <div class="learning-card"
+                 onclick="askQuestion()">
+
+                <div class="learning-icon">
+                    💡
+                </div>
+
+                <h3>Ask a Question</h3>
+
+                <p>
+                    Ask Student Buddy anything about the chapter.
+                </p>
+
+            </div>
+
+
+            <!-- Chapter Summary -->
+
+            <div class="learning-card"
+                 onclick="chapterSummary()">
+
+                <div class="learning-icon">
+                    📝
+                </div>
+
+                <h3>Chapter Summary</h3>
+
+                <p>
+                    Get a quick summary of the chapter.
+                </p>
+
+            </div>
+
+
+            <!-- Quiz -->
+
+            <div class="learning-card"
+                 onclick="takeQuiz()">
+
+                <div class="learning-icon">
+                    🧠
+                </div>
+
+                <h3>Take Quiz</h3>
+
+                <p>
+                    Test your knowledge with an interactive quiz.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <br>
+
+        <a href="/study">
+            ← Choose another chapter
+        </a>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =========================
+   Read selection
+========================= */
+
+const params =
+    new URLSearchParams(window.location.search);
+
+
+const selectedClass =
+    params.get("class");
+
+const subject =
+    params.get("subject");
+
+const chapter =
+    params.get("chapter");
+
+
+/* =========================
+   Save current selection
+========================= */
+
+if (selectedClass && subject && chapter) {
+
+    sessionStorage.setItem(
+        "studentBuddyClass",
+        selectedClass
+    );
+
+    sessionStorage.setItem(
+        "studentBuddySubject",
+        subject
+    );
+
+    sessionStorage.setItem(
+        "studentBuddyChapter",
+        chapter
+    );
+
+}
+
+
+/* =========================
+   Recover selection if needed
+========================= */
+
+const savedClass =
+    sessionStorage.getItem(
+        "studentBuddyClass"
+    );
+
+const savedSubject =
+    sessionStorage.getItem(
+        "studentBuddySubject"
+    );
+
+const savedChapter =
+    sessionStorage.getItem(
+        "studentBuddyChapter"
+    );
+
+
+const currentClass =
+    selectedClass || savedClass;
+
+const currentSubject =
+    subject || savedSubject;
+
+const currentChapter =
+    chapter || savedChapter;
+
+/* =========================
+   Display selection
+========================= */
+
+if (selectedClass) {
+
+    document.getElementById("classTitle")
+        .textContent =
+        "Class " + selectedClass;
+
+}
+
+
+if (subject) {
+
+    document.getElementById("subjectTitle")
+        .textContent =
+        subject;
+
+}
+
+
+if (chapter) {
+
+    document.getElementById("chapterTitle")
+        .textContent =
+        chapter;
+
+}
+
+
+/* =========================
+   Build common URL
+========================= */
+
+function buildFeatureUrl(route) {
+
+    return route +
+        "?class=" +
+        encodeURIComponent(selectedClass) +
+        "&subject=" +
+        encodeURIComponent(subject) +
+        "&chapter=" +
+        encodeURIComponent(chapter);
+
+}
+
+
+/* =========================
+   Explain Topic
+========================= */
+
+function explainTopic() {
+
+    if (!selectedClass || !subject || !chapter) {
+
+        alert(
+            "Class, subject or chapter information is missing."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        buildFeatureUrl("/explain");
+
+}
+
+
+/* =========================
+   Ask Question
+========================= */
+
+function askQuestion() {
+
+    if (!selectedClass || !subject || !chapter) {
+
+        alert(
+            "Class, subject or chapter information is missing."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        buildFeatureUrl("/ask");
+
+}
+
+
+/* =========================
+   Chapter Summary
+========================= */
+
+function chapterSummary() {
+
+    if (!selectedClass || !subject || !chapter) {
+
+        alert(
+            "Class, subject or chapter information is missing."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        buildFeatureUrl("/summary");
+
+}
+
+
+/* =========================
+   Take Quiz
+========================= */
+
+function takeQuiz() {
+
+    if (!selectedClass || !subject || !chapter) {
+
+        alert(
+            "Class, subject or chapter information is missing."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        buildFeatureUrl("/quiz");
+
+}
+
+</script>
+
+
+<script>
+
+/* =========================
+   Learning Time Tracker
+========================= */
+
+const startTime =
+    Date.now();
+
+
+function saveLearningTime() {
+
+    const endTime =
+        Date.now();
+
+
+    const duration =
+        Math.floor(
+            (endTime - startTime) / 1000
+        );
+
+
+    if (duration < 1) {
+
+        return;
+
+    }
+
+
+    fetch("/track-time", {
+
+        method: "POST",
+
+        headers: {
+
+            "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            section: "Study Buddy",
+
+            duration: duration
+
+        })
+
+    });
+
+}
+
+
+/* Save time when student leaves */
+
+window.addEventListener(
+    "beforeunload",
+    saveLearningTime
+);
+
+</script>
+
+
+</body>
+
+</html>
