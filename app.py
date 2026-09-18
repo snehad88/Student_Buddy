@@ -6,6 +6,7 @@ import sqlite3
 from datetime import datetime
 import markdown
 import json
+import time
 
 from curriculum import NCERT_CURRICULUM
 
@@ -37,6 +38,54 @@ app.secret_key = os.getenv(
 client = genai.Client(
     api_key=os.getenv("GEMINI_API_KEY")
 )
+
+GEMINI_MODEL = "gemini-3.5-flash-lite"
+GEMINI_MAX_RETRIES = 2
+GEMINI_RETRY_DELAYS = [2, 5]
+
+
+def generate_gemini(prompt):
+    """Generate Gemini content with short retries for temporary errors."""
+    last_error = None
+
+    for attempt in range(GEMINI_MAX_RETRIES + 1):
+        try:
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=prompt
+            )
+
+            if not response.text:
+                raise ValueError("Gemini returned an empty response.")
+
+            return response.text
+
+        except Exception as e:
+            last_error = e
+            error_text = str(e).upper()
+
+            retryable = (
+                "503" in error_text
+                or "UNAVAILABLE" in error_text
+                or (
+                    "429" in error_text
+                    and "PERMINUTE" not in error_text
+                    and "PER_DAY" not in error_text
+                    and "PERDAY" not in error_text
+                )
+            )
+
+            if not retryable or attempt >= GEMINI_MAX_RETRIES:
+                raise
+
+            delay = GEMINI_RETRY_DELAYS[attempt]
+            print(
+                f"Gemini temporary error. Retrying in {delay} seconds "
+                f"(retry {attempt + 1}/{GEMINI_MAX_RETRIES})..."
+            )
+            time.sleep(delay)
+
+    raise last_error
 
 
 # ============================================================
@@ -464,15 +513,7 @@ Be encouraging and friendly.
 
     try:
 
-        response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=prompt
-        )
-
-
-        explanation = response.text
-
-
+        explanation = generate_gemini(prompt)
         # ----------------------------------------------------
         # Save to cache
         # ----------------------------------------------------
@@ -519,8 +560,8 @@ Be encouraging and friendly.
         <h3>Explanation temporarily unavailable</h3>
 
         <p>
-        Student Buddy could not generate this explanation
-        right now.
+        Gemini is temporarily busy, so Student Buddy could not generate
+        this explanation right now.
         </p>
 
         <p>
@@ -638,15 +679,7 @@ Rules:
 
     try:
 
-        response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=prompt
-        )
-
-
-        answer = response.text
-
-
+        answer = generate_gemini(prompt)
     except Exception as e:
 
         print(
@@ -656,8 +689,8 @@ Rules:
 
 
         answer = """
-        Sorry, Student Buddy could not generate an answer
-        right now.
+        Gemini is temporarily busy, so Student Buddy could not generate
+        an answer right now.
 
         Please try again in a few moments.
         """
@@ -765,15 +798,7 @@ Rules:
 
     try:
 
-        response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=prompt
-        )
-
-
-        summary_text = response.text
-
-
+        summary_text = generate_gemini(prompt)
         # Convert Markdown to HTML
 
         summary_html = markdown.markdown(
@@ -794,8 +819,8 @@ Rules:
         <h3>⚠️ Summary temporarily unavailable</h3>
 
         <p>
-        Student Buddy could not generate the summary
-        right now.
+        Gemini is temporarily busy, so Student Buddy could not generate
+        the summary right now.
         </p>
 
         <p>
@@ -1243,18 +1268,7 @@ Rules:
 
     try:
 
-        response = client.models.generate_content(
-
-            model="gemini-3.6-flash",
-
-            contents=prompt
-
-        )
-
-
-        quiz_text = (
-            response.text.strip()
-        )
+        quiz_text = generate_gemini(prompt).strip()
 
 
         # ----------------------------------------------------
@@ -1311,7 +1325,7 @@ Rules:
 
             "error":
                 "Quiz could not be generated right now. "
-                "Please try again."
+                "Gemini is temporarily busy. Please try again in a few moments."
 
         }), 500
 
