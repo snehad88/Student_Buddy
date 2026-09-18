@@ -159,7 +159,13 @@ def home():
     return render_template(
         "index.html"
     )
+# =========================
+# New Joiner Kit
+# =========================
 
+@app.route("/new-joiner")
+def new_joiner():
+    return render_template("new_joiner.html")
 
 # ============================================================
 # Study Buddy

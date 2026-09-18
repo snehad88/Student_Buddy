@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>New Joiner Kit - Student Buddy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .joiner-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .joiner-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .joiner-header h2 {
+            margin-bottom: 8px;
+        }
+
+        .joiner-header p {
+            color: #666;
+        }
+
+        .joiner-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+       .joiner-card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .joiner-card h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+        }
+
+        .joiner-card ul {
+        padding-left: 22px;
+        margin-bottom: 0;
+        text-align: left;
+        }
+
+        .joiner-card li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .joiner-note {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #f5f7fb;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 700px) {
+
+            .joiner-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">🎒</div>
+
+        <div>
+
+            <h1>New Joiner Kit</h1>
+
+            <p>
+                Everything you need to know for a great start
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <div class="joiner-header">
+
+            <div class="joiner-icon">
+                🏫
+            </div>
+
+            <h2>Welcome to School! 👋</h2>
+
+            <p>
+                Here are some important school guidelines
+                to help you get started.
+            </p>
+
+        </div>
+
+
+        <div class="joiner-grid">
+
+
+            <!-- School Timings -->
+
+            <div class="joiner-card">
+
+                <h3>🕐 School Timings</h3>
+
+                <ul>
+
+                    <li>
+                        School starts at <strong>8:20 AM</strong>.
+                    </li>
+
+                    <li>
+                        Students should be present by
+                        <strong>8:15 AM</strong>.
+                    </li>
+
+                    <li>
+                        Primary, Middle & Secondary:
+                        <strong>8:20 AM – 3:30 PM</strong>
+                        Monday to Friday.
+                    </li>
+
+                    <li>
+                        Saturday:
+                        <strong>8:20 AM – 12:30 PM</strong>.
+                    </li>
+
+                    <li>
+                        The <strong>2nd Saturday</strong>
+                        is a holiday.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Code of Conduct -->
+
+            <div class="joiner-card">
+
+                <h3>🤝 Code of Conduct</h3>
+
+                <ul>
+
+                    <li>
+                        Wear the prescribed school uniform
+                        and identity card.
+                    </li>
+
+                    <li>
+                        Dress appropriately on special
+                        occasions and colour-dress days.
+                    </li>
+
+                    <li>
+                        Treat teachers, elders and fellow
+                        students with respect.
+                    </li>
+
+                    <li>
+                        Greet teachers and others with
+                        traditional <strong>"Namaste"</strong>.
+                    </li>
+
+                    <li>
+                        Keep classrooms, school buildings
+                        and the campus clean.
+                    </li>
+
+                    <li>
+                        Use dustbins for waste disposal.
+                    </li>
+
+                    <li>
+                        The school is a
+                        <strong>plastic-free zone</strong>.
+                    </li>
+
+                    <li>
+                        Be punctual and reach school on time.
+                    </li>
+
+                    <li>
+                        Do not bring mobile phones, valuables
+                        or prohibited publications to school.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Leave Rules -->
+
+            <div class="joiner-card">
+
+                <h3>📝 Leave Rules</h3>
+
+                <ul>
+
+                    <li>
+                        Inform your class teacher about
+                        planned leave through a letter
+                        or diary note.
+                    </li>
+
+                    <li>
+                        For emergency pickup, a request
+                        letter must be submitted at reception
+                        and permission obtained from the Principal.
+                    </li>
+
+                    <li>
+                        If you are absent for more than
+                        three days because of illness,
+                        a medical certificate is required.
+                    </li>
+
+                    <li>
+                        Keep your absence record updated
+                        in the school diary.
+                    </li>
+
+                    <li>
+                        Attendance on the first and last
+                        working day around vacations is compulsory.
+                    </li>
+
+                    <li>
+                        <strong>75% attendance is mandatory.</strong>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Library Rules -->
+
+            <div class="joiner-card">
+
+                <h3>📖 Library Rules</h3>
+
+                <ul>
+
+                    <li>
+                        You can borrow
+                        <strong>one book per week</strong>.
+                    </li>
+
+                    <li>
+                        Reference books and periodicals
+                        are not issued on loan.
+                    </li>
+
+                    <li>
+                        Return books on time to avoid fines.
+                    </li>
+
+                    <li>
+                        Do not write, underline, fold,
+                        tear or damage library books.
+                    </li>
+
+                    <li>
+                        Newspapers and magazines should
+                        be read only in the library.
+                    </li>
+
+                    <li>
+                        Maintain <strong>complete silence</strong>
+                        in the library.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="joiner-note">
+
+            <strong>🌟 Remember</strong>
+
+            <p>
+                Be punctual, respectful, responsible
+                and take care of your school and its resources.
+            </p>
+
+        </div>
+
+
+        <a href="/" class="back-link">
+            ← Back to Student Buddy
+        </a>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Student Buddy • Making school life smarter and easier
+        </p>
+
+    </footer>
+
+
+</div>
+
+</body>
+
+</html>
